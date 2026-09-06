@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: notekeeper
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secure_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://admin:secure_password@db:5432/notekeeper
+      JWT_SECRET_KEY: notekeeper-docker-secret-key-32-chars-long!
+      JWT_REFRESH_SECRET_KEY: notekeeper-docker-refresh-secret-32-chars-long!
+
+volumes:
+  postgres_data:
