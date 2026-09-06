@@ -1,0 +1,20 @@
+[project]
+name = "notekeeper"
+version = "1.0.0"
+description = "RESTful API service for NoteKeeper"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "sqlalchemy>=2.0.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "email-validator>=2.0.0",
+    "pyjwt>=2.8.0",
+    "bcrypt>=4.0.0",
+    "python-multipart>=0.0.6",
+    "python-dotenv>=1.0.0"
+]
+
+[tool.fastapi]
+entrypoint = "main:app"
